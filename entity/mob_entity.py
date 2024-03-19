@@ -4,7 +4,6 @@ from inventory import Inventory
 
 
 class MobEntity(Entity):
-    def __init__(self, position: Cell) -> None:
+    def __init__(self, position: Cell, ) -> None:
         super().__init__(position)
-        self.inventory = Inventory()
-        
+    

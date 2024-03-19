@@ -11,34 +11,30 @@ class Cell(Point):
         self.items = items or []
         self.occupied_by = occupied_by
         self.events = defaultdict(set)
-
+    
     def getTraversableDifficulty(self):
         return self.terrain_type.traversable_difficulty
     
-    def isOcupied(self):
+    def isOcupied(self) -> bool:
         return self.occupied_by is not None
     
     def removeOcupantEntity(self):
         self.occupied_by = None
     
-    def tryToPlaceEntity(self, entity: Entity, move_event_triger=True) -> bool:
+    def tryToPlaceEntity(self, entity: Entity) -> bool:
         """
         Попытка разместить сущность в ячейке карты.
 
         Params:
         - entity (Entity): Сущность, которую пытаемся разместить в ячейке.
-        - move_event_trigger (bool, optional): Флаг, указывающий, следует ли активировать события при перемещении
-        по клетке (по умолчанию True).
 
         Return:
         - bool: True, если размещение сущности в ячейке успешно; False, если ячейка уже занята.
         """
         if self.isOcupied():
             return False
-        if move_event_triger and self.events[EventTrigger.STEP_ON_CELL]:
-            for event in self.events[EventTrigger.STEP_ON_CELL]:
-                event.activate(entity)
+        
         self.occupied_by = entity
         return True
-
+    
     

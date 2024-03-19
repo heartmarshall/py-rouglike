@@ -5,28 +5,28 @@ from point import Point
 
 class Map:
     def __init__(self, width, height) -> None:
-        self.cells = [[None for i in range(width)] for j in range(height)]
+        self.cells = [[None for _ in range(width)] for _ in range(height)]
         self._width = width
         self._height = height
 
     def inBounds(self, x: int, y: int) -> bool:
         return 0 <= x < self._width and 0 <= y < self._height
     
-    def traversableDifficulty(self, x: int, y: int) -> bool:
+    def getTraversableDifficulty(self, x: int, y: int) -> bool:
         """
         Возвращает сложность проходимости клектки по координатам x, y
         """
         return self.cells[y][x].get_traversable_difficulty()
     
-    def set_cell(self, x, y, terrain_type, items=None, occupied_by=None):
+    def setCell(self, x, y, terrain_type, items=None, occupied_by=None):
         """
-        Перезаписсывает параметры клетки по координатам x, y
+        Устанавливает параметры клетки по координатам x, y
         """
         cell = Cell(x, y, terrain_type, items, occupied_by)
         self.cells[y][x] = cell
         return cell
     
-    def cellInfo(self, x:int, y:int) -> Cell:
+    def getCellInfo(self, x:int, y:int) -> Cell:
         """
         Возвращает клетку (Cell), находящуюся на карте по координатам x, y
 
